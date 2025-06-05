@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Will You Be My Girlfriend?</title>
+  <meta charset="UTF-8" />
+  <title>Will You Be My Girlfriend Po?</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -13,6 +13,13 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      position: relative;
+    }
+
+    img {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 20px;
     }
 
     h1 {
@@ -22,27 +29,38 @@
 
     .buttons {
       margin-top: 20px;
+      position: relative;
+      width: 220px;  
+      height: 50px;
+      display: flex;
+      align-items: center;
     }
 
-    button {
+    #yesBtn {
       padding: 15px 30px;
-      margin: 10px;
       font-size: 18px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-
-    #yesBtn {
       background-color: #ff69b4;
       color: white;
+      position: relative;
+      z-index: 1;
     }
 
     #noBtn {
+      position: absolute;
+      left: 120px; 
+      top: 0;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
       background-color: #d3d3d3;
       color: black;
-      position: absolute;
+      transition: 0.2s;
+      z-index: 2;
     }
 
     .message {
@@ -57,36 +75,88 @@
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       background-color: #fff0f5;
+      margin-top: 20px;
+    }
+
+    #noMessageDisplay {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #e75480;
+      font-weight: bold;
+      text-align: center;
+      min-height: 24px;
+      height: 24px;
+    }
+
+    #yesGif {
+      display: none;
+      max-width: 300px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Will you be my girlfriend?</h1>
+  <img id="topGif" src="https://i.pinimg.com/originals/2e/5a/1e/2e5a1edccccf99ca4eb98eee0792b1ec.gif" alt="pucca" />
+
+  <h1>Will You Be My Girlfriend Po?</h1>
+  
   <div class="buttons">
-    <button id="yesBtn" onclick="showMessage()">Yes >⩊<</button>
-    <button id="noBtn" onclick="moveButton()">No (ᗒᗣᗕ)՞</button>
+    <button id="yesBtn" onclick="showMessage()">Yes</button>
+    <button id="noBtn" onclick="moveButton()">No</button>
   </div>
 
+  <div id="noMessageDisplay"></div>
+
   <div class="message" id="message">
-    AAAAAA OMG I LOVE YOU RIZZYYYYYYY
+    YAYYYY I LOVE YOU PO RIZZYYY HEHEHEEH
   </div>
+
+  <img id="yesGif" src="https://i.pinimg.com/originals/79/23/81/7923814694a3953282f7cabe2bc63705.gif" alt="pucca" />
 
   <script>
     const noBtn = document.getElementById('noBtn');
     const message = document.getElementById('message');
+    const yesBtn = document.getElementById('yesBtn');
+    const title = document.querySelector('h1');
+    const buttonsDiv = document.querySelector('.buttons');
+    const gif = document.getElementById('topGif');
+    const noMessageDisplay = document.getElementById('noMessageDisplay');
+    const yesGif = document.getElementById('yesGif');
+
+    const noMessages = [
+      "wag naman po pls",
+      "hehe wag po",
+      "luh",
+      "aray",
+      "pag gumana yung no idol na kita",
+      "ezzz"
+    ];
 
     function moveButton() {
-      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      const maxX = window.innerWidth - noBtn.offsetWidth;
+      const maxY = window.innerHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.position = 'fixed'; 
       noBtn.style.left = `${x}px`;
       noBtn.style.top = `${y}px`;
+
+      const randomIndex = Math.floor(Math.random() * noMessages.length);
+      noMessageDisplay.textContent = noMessages[randomIndex];
     }
 
     function showMessage() {
-      document.querySelector('.buttons').style.display = 'none';
-      document.querySelector('h1').style.display = 'none';
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+      title.style.display = 'none';
+      buttonsDiv.style.display = 'none';
+      gif.style.display = 'none';
+      noMessageDisplay.style.display = 'none';
       message.style.display = 'block';
+      yesGif.style.display = 'block';  
     }
   </script>
 
